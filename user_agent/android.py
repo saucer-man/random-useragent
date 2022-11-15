@@ -1,6 +1,8 @@
 import random
 import json
 
+import datetime
+
 
 class Android:
     def __init__(self):
@@ -14,7 +16,7 @@ class Android:
                                     "99.0.4844", "100.0.4896", "101.0.4951", "102.0.5005", "103.0.5060", "104.0.5112",
                                     "105.0.5195", "106.0.5249", "107.0.5304", "108.0.5359"]
 
-        # from https://www.wandoujia.com/apps/36557/history?spm=aligames_platform_ug.wdj_seo.0.0.57205b3ebiRRii
+        # from https://www.wandoujia.com/apps/36557/history
         self.uc_version_list = ["15.1.5.1205", "15.1.4.1204", "15.1.2.1202", "15.1.1.1201", "15.0.9.1199",
                                 "15.0.7.1197", "15.0.6.1196", "15.0.5.1195", "15.0.4.1194", "15.0.3.1193",
                                 "15.0.2.1192", "15.0.1.1191", "15.0.0.1190", "14.1.0.1185", "14.0.0.1181",
@@ -47,6 +49,36 @@ class Android:
                                 "12.4.0.1020", "12.3.8.1018", "12.3.6.1016", "12.3.0.1010", "12.2.8.1008",
                                 "12.2.6.1006", "12.2.4.1004", "12.2.2.1002"]
 
+        # from https://www.wandoujia.com/apps/44621/history
+        self.qqbrowser_version_list = ["13.3", "13.2", "13.1", "13.0", "12.9",
+                                       "12.8", "12.7", "12.6", "12.5", "12.4", "12.3", "12.2", "12.1"]
+
+        # from https://www.wandoujia.com/apps/280151/history
+        self.baidu_browser_version_list = ["5.26.0.30", "5.22.0.30", "5.13.0.30", "5.10.0.30", "5.9.0.31", "5.7.5.30", "5.2.0.30", "4.21.5.31", "4.21.5.30", "4.20.4.31", "4.19.5.30", "4.19.0.30", "4.18.0.32", "4.18.0.31", "4.16.0.30", "4.15.0.30", "4.14.5.31", "4.14.5.30", "4.14.0.30", "4.13.5.31", "4.9.5.36", "4.9.5.34", "7.20.11.0", "7.19.13.0", "7.19.11.0", "7.19.10.0", "7.18.21.0", "7.18.20.0", "7.18.11.0", "7.17.12.0", "7.16.12.0", "7.15.15.0",
+                                           "7.14.14.0", "7.14.13.0", "7.13.13.0", "7.12.12.0", "7.11.13.0", "7.11.12.0", "7.10.12.0", "7.9.12.0", "7.8.12.0", "7.7.13.0", "7.6.12.0", "7.6.11.0", "7.5.22.0", "7.4.14.0", "7.3.14.0", "7.2.14.0", "7.1.12.0", "7.0.33.0", "7.0.15.0", "6.4.14.0", "6.3.20.0", "6.3.13.0", "6.2.20.0", "6.2.18.0", "6.2.16.0", "6.1.13.0", "6.0.23.0", "6.0.21.0", "6.0.15.0", "5.7.5.0", "5.7.3.0", "5.6.4.0", "5.6.3.0", "5.5.3.0", "5.4.5.0", "5.3.4.0", "5.2.3.0", "5.1.0.0"]
+
+        # from
+        self.wechat_version_list = ["6.7.3", "6.6.7", "8.0.27", "8.0.25", "8.0.24", "8.0.23", "8.0.22", "8.0.21", "8.0.20", "8.0.19", "8.0.18", "8.0.16", "8.0.15", "8.0.14", "8.0.11", "8.0.10", "8.0.9", "8.0.7", "8.0.6", "8.0.3", "8.0.2", "8.0.1", "8.0.0", "7.0.22", "7.0.21", "7.0.20", "7.0.19", "7.0.18",
+                                    "7.0.17", "7.0.16", "7.0.15", "7.0.14", "7.0.13", "7.0.12", "7.0.11", "7.0.10", "7.0.9", "7.0.8", "7.0.7", "7.0.6", "7.0.5", "7.0.4", "7.0.3", "7.0.0", "6.7.2", "6.6.6", "6.6.5", "6.6.3", "6.6.2", "6.6.1", "6.6.0", "6.5.24", "6.5.22", "6.5.19", "6.5.16", "6.5.13", "6.5.10", "6.5.8", "6.5.7", "6.5.6"]
+
+    @staticmethod
+    def generate_android_version() -> str:
+        # from ro.build.version.release 系统版本
+        l = ["12", "11", "10", "9", "8.1.0",
+             "8", "7.1.2", "7.1.1", "7.1.0", "7"]
+        return random.choice(l)
+
+    def generate_android_model(self) -> str:
+        # ro.product.model  手机代号
+        # ro.build.id 修订版本列表
+        # "Pixel 3 XL Build/PPRL.190801.002"
+        model = random.choice(self.android_model)
+        return model["model"] + " Build/" + model["id"]
+
+    def generate_chrome_version(self) -> str:
+        return '{0}.{1}'.format(random.choice(self.chrome_version_list),
+                                random.randint(80, 140))
+
     def generate_android_webview_ua(self) -> str:
         # generate webview useragent
         # in android is `WebView.getSettings().getUserAgentString()`
@@ -74,31 +106,51 @@ class Android:
         android_version = self.generate_android_version()
         android_model = self.generate_android_model()
         chrome_version = self.generate_chrome_version()
-        uc_version = self.generate_uc_version()
+        uc_version = random.choice(self.uc_version_list)
         ua = f"Mozilla/5.0 (Linux; Android {android_version}; zh-CN; {android_model}) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{chrome_version} UCBrowser/{uc_version} Mobile Safari/537.36"
         return ua
 
-    @staticmethod
-    def generate_android_version() -> str:
-        # from ro.build.version.release 系统版本
-        l = ["12", "11", "10", "9", "8.1.0", "8", "7.1.2", "7.1.1", "7.1.0", "7"]
-        return random.choice(l)
+    def generate_android_qq_ua(self) -> str:
+        # generate qq browser useragent
+        # Mozilla/5.0 (Linux; U; Android 10; zh-cn; M2004J19C Build/QP1A.190711.020) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.101 MQQBrowser/13.3 Mobile Safari/537.36
+        android_version = self.generate_android_version()
+        android_model = self.generate_android_model()
+        chrome_version = self.generate_chrome_version()
+        mqq_version = random.choice(self.qqbrowser_version_list)
+        ua = f"Mozilla/5.0 (Linux; Android {android_version}; zh-cn; {android_model}) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{chrome_version} MQQBrowser/{mqq_version} Mobile Safari/537.36"
+        return ua
 
-    def generate_android_model(self) -> str:
-        # ro.product.model  手机代号
-        # ro.build.id 修订版本列表
-        # "Pixel 3 XL Build/PPRL.190801.002"
-        model = random.choice(self.android_model)
-        return model["model"] + " Build/" + model["id"]
+    def generate_android_baidu_ua(self) -> str:
+        # generate baidu browser useragent
+        # Mozilla/5.0 (Linux; Android 10; M2004J19C Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.101 Mobile Safari/537.36 SP-engine/2.38.0 matrixstyle/0 flyflow/5.39.5.30 lite baiduboxapp/5.39.5.30 (Baidu; P1 10) NABar/1.0
+        baidu_browser_version = random.choice(self.baidu_browser_version_list)
+        baidu_engine_version = f"2.{random.randint(20,60)}.0"
+        ua = f"{self.generate_android_webview_ua()} SP-engine/{baidu_engine_version} matrixstyle/0 flyflow/{baidu_browser_version} lite baiduboxapp/{baidu_browser_version} (Baidu; P1 10) NABar/1.0"
+        return ua
 
-    def generate_chrome_version(self) -> str:
-        return '{0}.{1}'.format(random.choice(self.chrome_version_list),
-                                random.randint(80, 140))
+    def generate_android_wechat_ua(self) -> str:
+        # generate android wechat useragent
+        # Mozilla/5.0 (Linux; Android 10; M2004J19C Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/3263 MMWEBSDK/20210601 Mobile Safari/537.36 MMWEBID/2319 MicroMessenger/8.0.7.1920(0x28000737) Process/toolsmp WeChat/arm64 Weixin NetType/4G Language/zh_CN ABI/arm64
+        android_version = self.generate_android_version()
+        android_model = self.generate_android_model()
+        chrome_version = self.generate_chrome_version()
+        MMWEBSDK_version = (datetime.datetime.now(
+        ) - datetime.timedelta(days=random.randint(100, 500))).strftime('%Y%m%d')
+        XWEB_version = random.choice(
+            ["4313", "4309", "3262", "3263", "4308", "4312", "3179", "4297"])
+        MMWEBID_version = random.randint(1000, 9999)
+        net_type = random.choice(["4G", "5G", "WIFI"])
+        wechat_version = random.choice(
+            self.wechat_version_list) + "." + str(random.randint(100, 500)*10)
+        ua = f"Mozilla/5.0 (Linux; Android {android_version}; {android_model}; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{chrome_version} XWEB/{XWEB_version} MMWEBSDK/{MMWEBSDK_version} Mobile Safari/537.36 MMWEBID/{MMWEBID_version} MicroMessenger/{wechat_version}(0x28000737) Process/toolsmp WeChat/arm64 Weixin NetType/{net_type} Language/zh_CN ABI/arm64"
+        return ua
 
-    def generate_uc_version(self) -> str:
-        return random.choice(self.uc_version_list)
+    def generate_android_ua(self) -> str:
+        d = random.choice(
+            [self.generate_android_wechat_ua, self.generate_android_baidu_ua, self.generate_android_qq_ua, self.generate_android_uc_ua, self.generate_android_webview_ua])
+        return d()
 
 
 if __name__ == "__main__":
     a = Android()
-    print(a.generate_webview_ua())
+    print(a.generate_android_ua())
