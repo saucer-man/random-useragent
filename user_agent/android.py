@@ -2,19 +2,14 @@ import random
 import json
 
 import datetime
+from chrome import Chrome
 
 
-class Android:
+class Android(Chrome):
     def __init__(self):
+        super().__init__()
         with open("android_data.json", encoding="utf-8") as f:
             self.android_model = json.load(f)
-
-        # from https://en.wikipedia.org/wiki/Google_Chrome_version_history
-        self.chrome_version_list = ["80.0.3987", "81.0.4044", "83.0.4103", "84.0.4147", "85.0.4183", "86.0.4240",
-                                    "87.0.4280", "88.0.4324", "89.0.4389", "90.0.4430", "91.0.4472", "92.0.4515",
-                                    "93.0.4577", "94.0.4606", "95.0.4638", "96.0.4664", "97.0.4692", "98.0.4758",
-                                    "99.0.4844", "100.0.4896", "101.0.4951", "102.0.5005", "103.0.5060", "104.0.5112",
-                                    "105.0.5195", "106.0.5249", "107.0.5304", "108.0.5359"]
 
         # from https://www.wandoujia.com/apps/36557/history
         self.uc_version_list = ["15.1.5.1205", "15.1.4.1204", "15.1.2.1202", "15.1.1.1201", "15.0.9.1199",
@@ -54,12 +49,29 @@ class Android:
                                        "12.8", "12.7", "12.6", "12.5", "12.4", "12.3", "12.2", "12.1"]
 
         # from https://www.wandoujia.com/apps/280151/history
-        self.baidu_browser_version_list = ["5.26.0.30", "5.22.0.30", "5.13.0.30", "5.10.0.30", "5.9.0.31", "5.7.5.30", "5.2.0.30", "4.21.5.31", "4.21.5.30", "4.20.4.31", "4.19.5.30", "4.19.0.30", "4.18.0.32", "4.18.0.31", "4.16.0.30", "4.15.0.30", "4.14.5.31", "4.14.5.30", "4.14.0.30", "4.13.5.31", "4.9.5.36", "4.9.5.34", "7.20.11.0", "7.19.13.0", "7.19.11.0", "7.19.10.0", "7.18.21.0", "7.18.20.0", "7.18.11.0", "7.17.12.0", "7.16.12.0", "7.15.15.0",
-                                           "7.14.14.0", "7.14.13.0", "7.13.13.0", "7.12.12.0", "7.11.13.0", "7.11.12.0", "7.10.12.0", "7.9.12.0", "7.8.12.0", "7.7.13.0", "7.6.12.0", "7.6.11.0", "7.5.22.0", "7.4.14.0", "7.3.14.0", "7.2.14.0", "7.1.12.0", "7.0.33.0", "7.0.15.0", "6.4.14.0", "6.3.20.0", "6.3.13.0", "6.2.20.0", "6.2.18.0", "6.2.16.0", "6.1.13.0", "6.0.23.0", "6.0.21.0", "6.0.15.0", "5.7.5.0", "5.7.3.0", "5.6.4.0", "5.6.3.0", "5.5.3.0", "5.4.5.0", "5.3.4.0", "5.2.3.0", "5.1.0.0"]
+        self.baidu_browser_version_list = ["5.26.0.30", "5.22.0.30", "5.13.0.30", "5.10.0.30", "5.9.0.31", "5.7.5.30",
+                                           "5.2.0.30", "4.21.5.31", "4.21.5.30", "4.20.4.31", "4.19.5.30", "4.19.0.30",
+                                           "4.18.0.32", "4.18.0.31", "4.16.0.30", "4.15.0.30", "4.14.5.31", "4.14.5.30",
+                                           "4.14.0.30", "4.13.5.31", "4.9.5.36", "4.9.5.34", "7.20.11.0", "7.19.13.0",
+                                           "7.19.11.0", "7.19.10.0", "7.18.21.0", "7.18.20.0", "7.18.11.0", "7.17.12.0",
+                                           "7.16.12.0", "7.15.15.0",
+                                           "7.14.14.0", "7.14.13.0", "7.13.13.0", "7.12.12.0", "7.11.13.0", "7.11.12.0",
+                                           "7.10.12.0", "7.9.12.0", "7.8.12.0", "7.7.13.0", "7.6.12.0", "7.6.11.0",
+                                           "7.5.22.0", "7.4.14.0", "7.3.14.0", "7.2.14.0", "7.1.12.0", "7.0.33.0",
+                                           "7.0.15.0", "6.4.14.0", "6.3.20.0", "6.3.13.0", "6.2.20.0", "6.2.18.0",
+                                           "6.2.16.0", "6.1.13.0", "6.0.23.0", "6.0.21.0", "6.0.15.0", "5.7.5.0",
+                                           "5.7.3.0", "5.6.4.0", "5.6.3.0", "5.5.3.0", "5.4.5.0", "5.3.4.0", "5.2.3.0",
+                                           "5.1.0.0"]
 
         # from
-        self.wechat_version_list = ["6.7.3", "6.6.7", "8.0.27", "8.0.25", "8.0.24", "8.0.23", "8.0.22", "8.0.21", "8.0.20", "8.0.19", "8.0.18", "8.0.16", "8.0.15", "8.0.14", "8.0.11", "8.0.10", "8.0.9", "8.0.7", "8.0.6", "8.0.3", "8.0.2", "8.0.1", "8.0.0", "7.0.22", "7.0.21", "7.0.20", "7.0.19", "7.0.18",
-                                    "7.0.17", "7.0.16", "7.0.15", "7.0.14", "7.0.13", "7.0.12", "7.0.11", "7.0.10", "7.0.9", "7.0.8", "7.0.7", "7.0.6", "7.0.5", "7.0.4", "7.0.3", "7.0.0", "6.7.2", "6.6.6", "6.6.5", "6.6.3", "6.6.2", "6.6.1", "6.6.0", "6.5.24", "6.5.22", "6.5.19", "6.5.16", "6.5.13", "6.5.10", "6.5.8", "6.5.7", "6.5.6"]
+        self.wechat_version_list = ["6.7.3", "6.6.7", "8.0.27", "8.0.25", "8.0.24", "8.0.23", "8.0.22", "8.0.21",
+                                    "8.0.20", "8.0.19", "8.0.18", "8.0.16", "8.0.15", "8.0.14", "8.0.11", "8.0.10",
+                                    "8.0.9", "8.0.7", "8.0.6", "8.0.3", "8.0.2", "8.0.1", "8.0.0", "7.0.22", "7.0.21",
+                                    "7.0.20", "7.0.19", "7.0.18",
+                                    "7.0.17", "7.0.16", "7.0.15", "7.0.14", "7.0.13", "7.0.12", "7.0.11", "7.0.10",
+                                    "7.0.9", "7.0.8", "7.0.7", "7.0.6", "7.0.5", "7.0.4", "7.0.3", "7.0.0", "6.7.2",
+                                    "6.6.6", "6.6.5", "6.6.3", "6.6.2", "6.6.1", "6.6.0", "6.5.24", "6.5.22", "6.5.19",
+                                    "6.5.16", "6.5.13", "6.5.10", "6.5.8", "6.5.7", "6.5.6"]
 
     @staticmethod
     def generate_android_version() -> str:
@@ -74,10 +86,6 @@ class Android:
         # "Pixel 3 XL Build/PPRL.190801.002"
         model = random.choice(self.android_model)
         return model["model"] + " Build/" + model["id"]
-
-    def generate_chrome_version(self) -> str:
-        return '{0}.{1}'.format(random.choice(self.chrome_version_list),
-                                random.randint(80, 140))
 
     def generate_android_webview_ua(self) -> str:
         # generate webview useragent
@@ -124,7 +132,7 @@ class Android:
         # generate baidu browser useragent
         # Mozilla/5.0 (Linux; Android 10; M2004J19C Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.101 Mobile Safari/537.36 SP-engine/2.38.0 matrixstyle/0 flyflow/5.39.5.30 lite baiduboxapp/5.39.5.30 (Baidu; P1 10) NABar/1.0
         baidu_browser_version = random.choice(self.baidu_browser_version_list)
-        baidu_engine_version = f"2.{random.randint(20,60)}.0"
+        baidu_engine_version = f"2.{random.randint(20, 60)}.0"
         ua = f"{self.generate_android_webview_ua()} SP-engine/{baidu_engine_version} matrixstyle/0 flyflow/{baidu_browser_version} lite baiduboxapp/{baidu_browser_version} (Baidu; P1 10) NABar/1.0"
         return ua
 
@@ -141,13 +149,14 @@ class Android:
         MMWEBID_version = random.randint(1000, 9999)
         net_type = random.choice(["4G", "5G", "WIFI"])
         wechat_version = random.choice(
-            self.wechat_version_list) + "." + str(random.randint(100, 500)*10)
+            self.wechat_version_list) + "." + str(random.randint(100, 500) * 10)
         ua = f"Mozilla/5.0 (Linux; Android {android_version}; {android_model}; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{chrome_version} XWEB/{XWEB_version} MMWEBSDK/{MMWEBSDK_version} Mobile Safari/537.36 MMWEBID/{MMWEBID_version} MicroMessenger/{wechat_version}(0x28000737) Process/toolsmp WeChat/arm64 Weixin NetType/{net_type} Language/zh_CN ABI/arm64"
         return ua
 
     def generate_android_ua(self) -> str:
         d = random.choice(
-            [self.generate_android_wechat_ua, self.generate_android_baidu_ua, self.generate_android_qq_ua, self.generate_android_uc_ua, self.generate_android_webview_ua])
+            [self.generate_android_wechat_ua, self.generate_android_baidu_ua, self.generate_android_qq_ua,
+             self.generate_android_uc_ua, self.generate_android_webview_ua])
         return d()
 
 

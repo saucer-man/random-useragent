@@ -1,8 +1,11 @@
 from android import Android
+from windows import Windows
+import random
 
-class UserAgent(Android):
+class UserAgent(Android, Windows):
     def __init__(self):
         Android.__init__(self)
+        Windows.__init__(self)
 
     def android(self, app="default"):
         """
@@ -23,8 +26,20 @@ class UserAgent(Android):
             return self.generate_android_baidu_ua()
         if app == "wechat":
             return self.generate_android_wechat_ua()
- 
- 
+
+    def windows(self, app="default"):
+        if app == "default":
+            return self.generate_windows_ua()
+        if app == "chrome":
+            return self.generate_windows_chrome_ua()
+        if app == "edge":
+            return self.generate_windows_edge_ua()
+
+    def random(self):
+        d = random.choice(
+            [self.android, self.windows])
+        return d()
+
 if __name__ == "__main__":
     a = UserAgent()
-    print(a.android())
+    print(a.random())
