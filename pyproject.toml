@@ -1,6 +1,16 @@
 [build-system]
 requires = [
-"setuptools>=42",
+"setuptools",
 "wheel"
 ]
-build-backend = "setuptools.build_meta"
+[metadata]
+name = ruser_agent
+version = 0.0.1
+author = saucerman
+description = generate random user-agent
+long_description = file: README.md
+long_description_content_type = text/markdown
+url = https://github.com/saucerman/user_agent
+
+[options]
+python_requires = >=3

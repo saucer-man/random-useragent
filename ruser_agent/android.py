@@ -1,6 +1,6 @@
 import random
 import json
-
+import os
 import datetime
 from chrome import Chrome
 
@@ -8,7 +8,9 @@ from chrome import Chrome
 class Android(Chrome):
     def __init__(self):
         super().__init__()
-        with open("android_data.json", encoding="utf-8") as f:
+        android_data_path = os.path.join(
+            os.path.dirname(__file__), 'android_data.json')
+        with open(android_data_path, encoding="utf-8") as f:
             self.android_model = json.load(f)
 
         # from https://www.wandoujia.com/apps/36557/history
@@ -63,7 +65,7 @@ class Android(Chrome):
                                            "5.7.3.0", "5.6.4.0", "5.6.3.0", "5.5.3.0", "5.4.5.0", "5.3.4.0", "5.2.3.0",
                                            "5.1.0.0"]
 
-        # from
+        # from https://www.wandoujia.com/apps/596157/history
         self.wechat_version_list = ["6.7.3", "6.6.7", "8.0.27", "8.0.25", "8.0.24", "8.0.23", "8.0.22", "8.0.21",
                                     "8.0.20", "8.0.19", "8.0.18", "8.0.16", "8.0.15", "8.0.14", "8.0.11", "8.0.10",
                                     "8.0.9", "8.0.7", "8.0.6", "8.0.3", "8.0.2", "8.0.1", "8.0.0", "7.0.22", "7.0.21",
@@ -75,15 +77,14 @@ class Android(Chrome):
 
     @staticmethod
     def generate_android_version() -> str:
-        # from ro.build.version.release 系统版本
+        # from ro.build.version.release 
         l = ["12", "11", "10", "9", "8.1.0",
              "8", "7.1.2", "7.1.1", "7.1.0", "7"]
         return random.choice(l)
 
     def generate_android_model(self) -> str:
-        # ro.product.model  手机代号
-        # ro.build.id 修订版本列表
-        # "Pixel 3 XL Build/PPRL.190801.002"
+        # ro.product.model + ro.build.id
+        # e.g. "Pixel 3 XL Build/PPRL.190801.002"
         model = random.choice(self.android_model)
         return model["model"] + " Build/" + model["id"]
 
@@ -91,7 +92,6 @@ class Android(Chrome):
         # generate webview useragent
         # in android is `WebView.getSettings().getUserAgentString()`
         # eg. "Mozilla/5.0 (Linux; Android 10; MI 8 Build/QKQ1.190828.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.101 Mobile Safari/537.36"
-        # 这里不加U
         android_version = self.generate_android_version()
         android_model = self.generate_android_model()
         chrome_version = self.generate_chrome_version()
@@ -102,7 +102,6 @@ class Android(Chrome):
         # generate app useragent
         # in android is `System.getProperty("http.agent");`
         # eg. "Dalvik/2.1.0 (Linux; U; Android 10; Pixel 3a Build/QQ2A.200305.002)"
-        # 这里一般要U
         android_version = self.generate_android_version()
         android_model = self.generate_android_model()
         ua = f"Dalvik/2.1.0 (Linux; U; Android {android_version}; {android_model})"
