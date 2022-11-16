@@ -5,7 +5,7 @@ This is a package to generate random user-agent. support simulating windows, lin
 ## how to install
 
 ```bash
-python3 -m pip install random_useragent
+python3 -m pip install r-useragent
 ```
 
 ##  how to use
