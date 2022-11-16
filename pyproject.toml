@@ -1,16 +1,20 @@
 [build-system]
-requires = [
-"setuptools",
-"wheel"
-]
-[metadata]
-name = ruser_agent
-version = 0.0.1
-author = saucerman
-description = generate random user-agent
-long_description = file: README.md
-long_description_content_type = text/markdown
-url = https://github.com/saucerman/user_agent
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
 
-[options]
-python_requires = >=3
+[project]
+name = "random-useragent"
+version = "0.0.1"
+authors = [
+  { name="saucerman", email="gyq0929@gmail.com" },
+]
+description = "generate random user-agent"
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/saucer-man/random-useragent"
+"Bug Tracker" = "https://github.com/saucer-man/random-useragent/issues"

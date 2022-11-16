@@ -1,9 +1,9 @@
-from ruser_agent import UserAgent
+from random_useragent import UserAgent
 
 u = UserAgent()
 
 # generate android user-agent
-print(u.android()) # random 
+print(u.android())  # random
 print(u.android(app="app"))
 print(u.android(app="webview"))
 print(u.android(app="uc"))
@@ -12,7 +12,7 @@ print(u.android(app="qq"))
 print(u.android(app="wechat"))
 
 # generate windows user-agent from chrome,firefox,edge...
-print(u.windows()) # random
+print(u.windows())  # random
 print(u.windows(app="chrome"))
 print(u.windows(app="firefox"))
 print(u.windows(app="edge"))

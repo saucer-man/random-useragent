@@ -1,8 +1,9 @@
-from android import Android
-from windows import Windows
-from mac import Mac
-from linux import Linux
 import random
+
+from random_useragent.android import Android
+from random_useragent.linux import Linux
+from random_useragent.mac import Mac
+from random_useragent.windows import Windows
 
 
 class UserAgent(Android, Windows, Mac, Linux):

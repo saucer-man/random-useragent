@@ -1,5 +1,6 @@
-from chrome import Chrome
 import random
+
+from random_useragent.chrome import Chrome
 
 
 class Linux(Chrome):

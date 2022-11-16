@@ -1,8 +1,9 @@
-import random
+import datetime
 import json
 import os
-import datetime
-from chrome import Chrome
+import random
+
+from random_useragent.chrome import Chrome
 
 
 class Android(Chrome):
