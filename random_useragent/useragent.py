@@ -38,6 +38,8 @@ class UserAgent(Android, Windows, Mac, Linux):
             return self.generate_windows_ua()
         if app == "chrome":
             return self.generate_windows_chrome_ua()
+        if app == "firefox":
+            return self.generate_windows_firefox_ua()
         if app == "edge":
             return self.generate_windows_edge_ua()
 
