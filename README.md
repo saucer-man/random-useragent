@@ -26,6 +26,13 @@ print(u.android(app="baidu"))
 print(u.android(app="qq"))
 print(u.android(app="wechat"))
 
+
+# generate iphone user-agent
+print(u.iphone())
+print(u.iphone(app="chrome"))
+print(u.iphone(app="safari"))
+
+
 # generate windows user-agent from chrome,firefox,edge...
 print(u.windows())  # random
 print(u.windows(app="chrome"))

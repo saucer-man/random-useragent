@@ -4,14 +4,15 @@ from random_useragent.android import Android
 from random_useragent.linux import Linux
 from random_useragent.mac import Mac
 from random_useragent.windows import Windows
+from random_useragent.iphone import Iphone
 
-
-class UserAgent(Android, Windows, Mac, Linux):
+class UserAgent(Android, Windows, Mac, Linux,Iphone):
     def __init__(self):
         Android.__init__(self)
         Windows.__init__(self)
         Mac.__init__(self)
         Linux.__init__(self)
+        Iphone.__init__(self)
 
     def android(self, app="default"):
         """
@@ -66,9 +67,18 @@ class UserAgent(Android, Windows, Mac, Linux):
             [self.windows, self.mac, self.linux])
         return d()
 
+    def iphone(self,app="default"):
+        if app == "default":
+            return self.generate_iphone_ua()
+        if app == "chrome":
+            return self.generate_iphone_chrome_ua()
+        if app == "safari":
+            return self.generate_iphone_safari_ua()
+
+
     def random(self):
         d = random.choice(
-            [self.android, self.windows, self.mac, self.linux])
+            [self.android, self.windows, self.mac, self.linux,self.iphone])
         return d()
 
 
@@ -80,3 +90,4 @@ if __name__ == "__main__":
     print(a.linux())
     print(a.mac())
     print(a.pc())
+    print(a.iphone())
