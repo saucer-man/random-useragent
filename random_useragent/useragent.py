@@ -51,8 +51,8 @@ class UserAgent(Android, Windows, Mac, Linux,Iphone):
             return self.generate_mac_chrome_ua()
         if app == "firefox":
             return self.generate_mac_firefox_ua()
-        if app == "safiri":
-            return self.generate_mac_safiri_ua()
+        if app == "safari":
+            return self.generate_mac_safari_ua()
 
     def linux(self, app="default"):
         if app == "default":

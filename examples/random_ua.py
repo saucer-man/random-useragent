@@ -33,7 +33,7 @@ print(u.linux(app="firefox"))
 print(u.mac())
 print(u.mac(app="chrome"))
 print(u.mac(app="firefox"))
-print(u.mac(app="safiri"))
+print(u.mac(app="safari"))
 
 # and if you want, you can just generate random ua
 print(u.random())
